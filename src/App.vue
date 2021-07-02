@@ -2,24 +2,23 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App" :date="currentDate"/>
-    <button v-on:click="onclick">Click me </button> / {{ count }}
-    <button @:click="count = 1 + 2">Sum</button>
-    <button @:click="onclick2(1, 4)">Click me 2</button>
-
+    <Calculator/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import Calculator from './components/Calculator'
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    Calculator
   },
   data() {
     return {
-      count: 0,
       currentDate: new Date().toDateString(),
     }
   },
