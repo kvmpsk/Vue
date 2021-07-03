@@ -4,17 +4,24 @@
     <input type="number" v-model.number="operand2" placeholder="operand2"/>
     = {{ result }}
 
+    <div class="error"
+         :class="{'red': error}">
+         {{ error }}
+    </div>
 
       <div class="keyboard">
-        <button @click="result = operand1 + operand2">+</button>
-        <button @click="result = operand1 - operand2">-</button>
-        <button @click="result = operand1 * operand2">*</button>
-        <button @click="result = operand1 / operand2">/</button>
+        <button @click="calculate('+')">+</button>
+        <button @click="calculate('-')">-</button>
+        <button @click="calculate('*')">*</button>
+        <button @click="calculate('/')">/</button>
+        <button @click="calculate('Целочисленное деление')">Целочисленное деление</button>
+
 
       </div>
 
-    <button @click="powWithOperand">pow</button>
-     = {{ powWithOperand }}
+      <button @click="powWithOperand">Возведение в степень</button>
+       = {{ powWithOperand }}
+
   </div>
 </template>
 
@@ -25,11 +32,50 @@ export default {
     return {
       operand1: 0,
       operand2: 0,
-      result: 0
+      result: 0,
+      error: ""
     }
   },
   methods: {
-
+    calculate(operation = "+") {
+      this.error = "";
+      switch (operation) {
+        case '+':
+          this.add()
+          break;
+        case '-':
+          this.substract()
+          break;
+        case '*':
+          this.multiply()
+          break;
+        case '/':
+          this.divide()
+          break;
+        case 'Целочисленное деление':
+          this.Whole()
+          break;
+      }
+    },
+    add() {
+      this.result = this.operand1 + this.operand2
+    },
+    substract() {
+      this.result = this.operand1 - this.operand2
+    },
+    multiply() {
+      this.result = this.operand1 * this.operand2
+    },
+    divide() {
+      const { operand1, operand2 } = this
+      if (operand2 === 0) {
+        return this.error = "Делить на 0 нельзя"
+      }
+      this.result = operand1 / operand2
+    },
+    Whole() {
+      this.result = Math.floor(this.operand1 / this.operand2)
+    }
   },
   computed: {
     powWithOperand() {
@@ -40,5 +86,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .red {
+    color: red;
+  }
 </style>
