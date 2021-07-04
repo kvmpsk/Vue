@@ -9,20 +9,26 @@
          {{ error }}
     </div>
 
-      <div class="keyboard">
-        <button @click="calculate('+')">+</button>
-        <button @click="calculate('-')">-</button>
-        <button @click="calculate('*')">*</button>
-        <button @click="calculate('/')">/</button>
-        <button @click="calculate('Целочисленное деление')">Целочисленное деление</button>
+    <div class="keyboard">
+      <button v-for="operand in operands"
+              @click="calculate(operand)"
+              :key="operand"
+              v-bind:title="operand"
+              >
+            {{ operand }}
+      </button>
+    </div>
 
 
-      </div>
-
-      <button @click="powWithOperand">Возведение в степень</button>
-       = {{ powWithOperand }}
+  <div class="keybutton">
+      <button v-for="(item, idx) in calcButton" :key="idx">
+        {{ item }}
+      </button>
+  </div>
 
   </div>
+
+
 </template>
 
 <script>
@@ -33,7 +39,10 @@ export default {
       operand1: 0,
       operand2: 0,
       result: 0,
-      error: ""
+      error: "",
+      logs: {},
+      calcButton: [0,1,2,3,4,5,6,7,8,9],
+      operands: ['+', '-', '/', '*', 'Целочисленное деление']
     }
   },
   methods: {
@@ -56,6 +65,8 @@ export default {
           this.Whole()
           break;
       }
+      const key = Date.now()
+      this.logs[key] = `${this.operand1}${operation}${this.operand2} = ${this.result}`
     },
     add() {
       this.result = this.operand1 + this.operand2
@@ -78,9 +89,7 @@ export default {
     }
   },
   computed: {
-    powWithOperand() {
-      return Math.pow(this.operand1, this.operand2)
-    }
+
   }
 }
 </script>
@@ -88,5 +97,13 @@ export default {
 <style scoped>
   .red {
     color: red;
+  }
+  .keybutton {
+    margin-top: 20px;
+  }
+
+  .keyboard {
+    margin-top: 20px;
+    margin-bottom: 5px;
   }
 </style>
