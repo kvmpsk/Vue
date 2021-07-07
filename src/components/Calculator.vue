@@ -6,7 +6,7 @@
 
     <div class="error"
          :class="{'red': error}">
-         {{ error }}
+      {{ error }}
     </div>
 
     <div class="keyboard">
@@ -14,17 +14,28 @@
               @click="calculate(operand)"
               :key="operand"
               v-bind:title="operand"
-              >
-            {{ operand }}
+      >
+        {{ operand }}
       </button>
     </div>
 
 
-  <div class="keybutton">
+    <div class="keybutton">
       <button v-for="(item, idx) in calcButton" :key="idx">
         {{ item }}
       </button>
-  </div>
+    </div>
+
+    <div class="check_operand">
+      <label for="operand1">
+        <input type="radio" id="operand1"><span>Операнд1</span>
+      </label>
+
+      <label for="operand2">
+        <input type="radio" id="operand2"><span>Операнд2</span>
+      </label>
+
+    </div>
 
   </div>
 
@@ -41,8 +52,8 @@ export default {
       result: 0,
       error: "",
       logs: {},
-      calcButton: [0,1,2,3,4,5,6,7,8,9],
-      operands: ['+', '-', '/', '*', 'Целочисленное деление']
+      calcButton: [0,1,2,3,4,5,6,7,8,9,'<' ],
+      operands: ['+', '-', '/', '*']
     }
   },
   methods: {
@@ -60,9 +71,6 @@ export default {
           break;
         case '/':
           this.divide()
-          break;
-        case 'Целочисленное деление':
-          this.Whole()
           break;
       }
       const key = Date.now()
@@ -83,27 +91,22 @@ export default {
         return this.error = "Делить на 0 нельзя"
       }
       this.result = operand1 / operand2
-    },
-    Whole() {
-      this.result = Math.floor(this.operand1 / this.operand2)
     }
   },
   computed: {
-
   }
 }
 </script>
 
 <style scoped>
-  .red {
-    color: red;
-  }
-  .keybutton {
-    margin-top: 20px;
-  }
-
-  .keyboard {
-    margin-top: 20px;
-    margin-bottom: 5px;
-  }
+.red {
+  color: red;
+}
+.keybutton {
+  margin-top: 20px;
+}
+.keyboard {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
 </style>
