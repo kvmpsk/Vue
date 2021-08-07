@@ -53,7 +53,7 @@ export default {
           this.divide()
           break;
         case 'Целочисленное деление':
-          this.Whole()
+          this.whole()
           break;
       }
     },
@@ -73,7 +73,7 @@ export default {
       }
       this.result = operand1 / operand2
     },
-    Whole() {
+    whole() {
       this.result = Math.floor(this.operand1 / this.operand2)
     }
   },

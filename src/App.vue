@@ -1,36 +1,17 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App" :date="currentDate"/>
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
     <Calculator/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-import Calculator from './components/Calculator'
-
+import Calculator from "@/components/Calculator";
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
     Calculator
-  },
-  data() {
-    return {
-      currentDate: new Date().toDateString(),
-    }
-  },
-  methods: {
-    onclick() {
-      this.count +=1
-    },
-    onclick2(param1, param2) {
-      this.count = param1 + param2
-    }
-  },
-  computed: {
-
   }
 }
 </script>
